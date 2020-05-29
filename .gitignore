@@ -1,3 +1,4 @@
-/target/classes/
+ /target/classes/
 /.idea/
 /spring-statemachine-in-action.iml
+/target/classes/
