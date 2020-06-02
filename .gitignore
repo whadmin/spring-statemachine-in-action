@@ -2,3 +2,4 @@
 /.idea/
 /spring-statemachine-in-action.iml
 /target/classes/
+/target/test-classes/
