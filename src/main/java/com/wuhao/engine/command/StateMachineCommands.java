@@ -40,7 +40,7 @@ public class StateMachineCommands {
 
 
     /**
-     * exe  "15271872494" "default" --event "E1"  --source "S1"  --target "S5"
+     * exe  "15271872494" "default" --event "E2"  --source "S2"  --target "S5"
      * @param businessId
      * @param businessIdentity
      * @param event
@@ -50,7 +50,7 @@ public class StateMachineCommands {
      */
     @ShellMethod(key = "exe", value = "执行流程")
     public String execute(@ShellOption final String businessId, @ShellOption final String businessIdentity, @ShellOption final TestEvents event, @ShellOption final TestStates source, @ShellOption final TestStates target) {
-        EngineContext<Object> context = EngineContext.builder().source(source).target(target).build();
+        EngineContext context = EngineContext.builder().source(source).target(target).build();
         engineService.execute(businessId, businessIdentity, event, context);
         return "execute success";
     }

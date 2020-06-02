@@ -21,6 +21,7 @@ import org.springframework.statemachine.access.StateMachineFunction;
 import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.statemachine.listener.StateMachineListenerAdapter;
 import org.springframework.statemachine.service.DefaultStateMachineService;
+import org.springframework.statemachine.support.DefaultStateMachineContext;
 import org.springframework.statemachine.support.StateMachineInterceptor;
 import org.springframework.stereotype.Service;
 
@@ -60,23 +61,30 @@ public class StateMachineStrategyServiceImpl implements BeanFactoryAware, Dispos
             StateMachine<TestStates, TestEvents> stateMachine = businessMachines.get(businessId);
             if (stateMachine == null) {
                 stateMachine = stateMachineFactory.getStateMachine(businessId);
-                if (stateMachinePersist != null) {
-                    try {
-                        StateMachineContext<TestStates, TestEvents> stateMachineContext = stateMachinePersist.read(businessId);
-                        stateMachine = restoreStateMachine(stateMachine, stateMachineContext);
-                    } catch (Exception e) {
-                        log.error("Error handling context", e);
-                        throw new StateMachineException("Unable to read context from store", e);
-                    }
-                    stateMachine.getStateMachineAccessor().doWithRegion(new StateMachineFunction<StateMachineAccess<TestStates, TestEvents>>() {
-                        @Override
-                        public void apply(StateMachineAccess<TestStates, TestEvents> function) {
-                            function.addStateMachineInterceptor((StateMachineInterceptor<TestStates, TestEvents>) onNextActionInterceptor);
+
+                TestStates source = engineContext.getSource();
+                if (source != null) {
+                    StateMachineContext<TestStates, TestEvents> stateMachineContext = new DefaultStateMachineContext<>(source, null, null, null, null, stateMachine.getId());
+                    stateMachine = restoreStateMachine(stateMachine, stateMachineContext);
+                } else {
+                    if (stateMachinePersist != null) {
+                        try {
+                            StateMachineContext<TestStates, TestEvents> stateMachineContext = stateMachinePersist.read(businessId);
+                            stateMachine = restoreStateMachine(stateMachine, stateMachineContext);
+                        } catch (Exception e) {
+                            log.error("Error handling context", e);
+                            throw new StateMachineException("Unable to read context from store", e);
                         }
-                    });
+                    }
                 }
+                stateMachine.getStateMachineAccessor().doWithRegion(new StateMachineFunction<StateMachineAccess<TestStates, TestEvents>>() {
+                    @Override
+                    public void apply(StateMachineAccess<TestStates, TestEvents> function) {
+                        function.addStateMachineInterceptor((StateMachineInterceptor<TestStates, TestEvents>) onNextActionInterceptor);
+                    }
+                });
                 businessMachines.put(businessId, stateMachine);
-                if(Objects.nonNull(stateMachine.getState())){
+                if (Objects.nonNull(stateMachine.getState())) {
                     engineContext.setSource(stateMachine.getState().getId());
                 }
             }

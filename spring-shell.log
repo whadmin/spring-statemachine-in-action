@@ -32,3 +32,4 @@
 1591085708707:exe  "15271872494" "default" --event "E1"  --source "S1"  --target "S5"
 1591096177124:exe  "15271872494" "default" --event "E1"  --source "S1"  --target "S4"
 1591096244495:exe  "15271872494" "default" --event "E1"  --source "S1"  --target "S5"
+1591096895217:exe  "15271872494" "default" --event "E2"  --source "S2"  --target "S5"

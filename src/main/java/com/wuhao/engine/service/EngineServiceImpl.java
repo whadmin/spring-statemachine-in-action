@@ -57,7 +57,7 @@ public class EngineServiceImpl implements EngineService<TestStates, TestEvents> 
      * @param engineContext    流程引擎上下文
      * @return
      */
-    public Message<TestEvents> bulidMessage(String businessId, String businessIdentity, TestEvents event, EngineContext<Object> engineContext) {
+    public Message<TestEvents> bulidMessage(String businessId, String businessIdentity, TestEvents event, EngineContext engineContext) {
         MessageBuilder<TestEvents> messageBuilder = MessageBuilder
                 .withPayload(event)
                 .setHeader("businessId", businessId)
