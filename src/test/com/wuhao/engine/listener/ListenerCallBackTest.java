@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  * @Author: wuhao.w
  * @Date: 2020/6/1 12:11
  */
-public class ListenerCallbackTest {
+public class ListenerCallBackTest {
 
     @Test
     public void teststateMachineStartedAndStop() throws InterruptedException {

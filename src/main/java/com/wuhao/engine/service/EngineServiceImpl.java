@@ -2,6 +2,7 @@ package com.wuhao.engine.service;
 
 import com.wuhao.engine.context.EngineContext;
 import com.wuhao.engine.event.TestEvents;
+import com.wuhao.engine.interceptor.OnNextActionInterceptor;
 import com.wuhao.engine.status.TestStates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
@@ -18,6 +19,8 @@ public class EngineServiceImpl implements EngineService<TestStates, TestEvents> 
 
     @Autowired
     private StateMachineStrategyService<TestStates, TestEvents> stateMachineService;
+
+
 
     /**
      * 执行流程引擎

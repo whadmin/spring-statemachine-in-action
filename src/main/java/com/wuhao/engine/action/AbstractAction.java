@@ -26,33 +26,8 @@ public abstract class AbstractAction implements Action<TestStates, TestEvents> {
         MessageHeaders messageHeaders = context.getMessageHeaders();
 
         executeInternal(messageHeaders);
-        //获取上下文
-        EngineContext engineContext = messageHeaders.get("engineContext", EngineContext.class);
-        if (hasNext(context, engineContext)) {
-            onNext(context);
-        }
     }
 
-    protected void onNext(StateContext<TestStates, TestEvents> context) {
-        boolean result = context.getStateMachine().sendEvent(bulidMessage(getNextEvent(), context.getMessage().getHeaders()));
-        System.out.println(result);
-    }
-
-    public boolean hasNext(StateContext<TestStates, TestEvents> context, EngineContext engineContext) {
-        return !context.getTransition().getTarget().getId().equals(engineContext.getTarget());
-    }
-
-    /**
-     * 构造消息事件
-     */
-    public Message<TestEvents> bulidMessage(TestEvents event, MessageHeaders headers) {
-        MessageBuilder<TestEvents> messageBuilder = MessageBuilder
-                .withPayload(event);
-        headers.entrySet().stream().filter(p->!p.getKey().equals("id")&&!p.getKey().equals("timestamp")).forEach(entry -> {
-            messageBuilder.setHeader(entry.getKey(), entry.getValue());
-        });
-        return messageBuilder.build();
-    }
 
     public abstract void executeInternal(MessageHeaders messageHeaders);
 
