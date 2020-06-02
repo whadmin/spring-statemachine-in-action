@@ -28,11 +28,7 @@ import java.util.concurrent.CountDownLatch;
 public class OnNextActionInterceptor extends StateMachineInterceptorAdapter<TestStates, TestEvents> {
 
 
-    @Override
-    public void postStateChange(State<TestStates, TestEvents> state, Message<TestEvents> message, Transition<TestStates, TestEvents> transition,
-                                StateMachine<TestStates, TestEvents> stateMachine) {
-        postStateChange(state, message, transition, stateMachine, stateMachine);
-    }
+
 
     @Override
     public void postStateChange(State<TestStates, TestEvents> state, Message<TestEvents> message, Transition<TestStates, TestEvents> transition,

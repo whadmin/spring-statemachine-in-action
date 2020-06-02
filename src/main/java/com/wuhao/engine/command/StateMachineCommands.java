@@ -52,6 +52,6 @@ public class StateMachineCommands {
     public String execute(@ShellOption final String businessId, @ShellOption final String businessIdentity, @ShellOption final TestEvents event, @ShellOption final TestStates source, @ShellOption final TestStates target) {
         EngineContext<Object> context = EngineContext.builder().source(source).target(target).build();
         engineService.execute(businessId, businessIdentity, event, context);
-        return "State machine started";
+        return "execute success";
     }
 }
