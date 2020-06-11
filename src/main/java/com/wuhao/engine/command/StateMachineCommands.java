@@ -40,7 +40,7 @@ public class StateMachineCommands {
 
 
     /**
-     * exe  "15271872494" "default" --event "E2"  --source "S2"  --target "S5"
+     * exe  "15271872494" "default" --event "E1"  --source "S1"  --target "S5"
      * @param businessId
      * @param businessIdentity
      * @param event

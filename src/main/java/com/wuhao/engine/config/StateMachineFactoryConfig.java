@@ -17,6 +17,8 @@ import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
+import org.springframework.statemachine.data.redis.RedisPersistingStateMachineInterceptor;
+import org.springframework.statemachine.data.redis.RedisStateMachineRepository;
 import org.springframework.statemachine.persist.StateMachineRuntimePersister;
 import org.springframework.statemachine.service.DefaultStateMachineService;
 import org.springframework.statemachine.service.StateMachineService;
@@ -31,6 +33,9 @@ import java.util.EnumSet;
 @EnableStateMachineFactory(name = "default")
 public class StateMachineFactoryConfig
         extends EnumStateMachineConfigurerAdapter<TestStates, TestEvents> {
+
+    @Autowired
+    private StateMachineRuntimePersister<TestStates, TestEvents, String> stateMachineRuntimePersister;
 
 
     @Autowired
@@ -51,9 +56,10 @@ public class StateMachineFactoryConfig
     @Override
     public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config)
             throws Exception {
-        config
-                .withConfiguration()
-                .autoStartup(false);  //是否自动启动
+        config.withPersistence()
+                .runtimePersister(stateMachineRuntimePersister);
+        config.withConfiguration()
+                .autoStartup(false);
     }
 
     /**
@@ -100,10 +106,7 @@ public class StateMachineFactoryConfig
                 .action(s4tos5Action);
     }
 
-    @Bean
-    public StateMachineService<TestStates, TestEvents> stateMachineService(
-            @Autowired @Qualifier("default") StateMachineFactory<TestStates, TestEvents> stateMachineFactory,
-            StateMachinePersist<TestStates, TestEvents, String> stateMachinePersist) {
-        return new DefaultStateMachineService<TestStates, TestEvents>(stateMachineFactory, stateMachinePersist);
-    }
+
+
+
 }

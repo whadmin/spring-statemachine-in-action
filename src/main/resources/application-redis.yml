@@ -1,0 +1,19 @@
+#Spring redis配置,参考 RedisProperties
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    #Redis服务器连接密码
+    password:
+    # 连接超时时间（毫秒）
+    timeout: 2000
+    # 使用lettuce作为客户端配置
+    lettuce:
+      pool:
+        max-active: 100
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: 1000
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 20
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 2
