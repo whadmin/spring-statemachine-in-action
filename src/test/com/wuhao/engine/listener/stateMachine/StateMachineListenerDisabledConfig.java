@@ -95,9 +95,9 @@ public class StateMachineListenerDisabledConfig extends EnumStateMachineConfigur
         return new ExecuteAction("S1->S2 Action");
     }
 
-    @Bean
-    public StateMachineApplicationEventListener stateMachineApplicationEventListener() {
-        return new StateMachineApplicationEventListener();
-    }
+//    @Bean
+//    public StateMachineApplicationEventListener stateMachineApplicationEventListener() {
+//        return new StateMachineApplicationEventListener();
+//    }
 
 }

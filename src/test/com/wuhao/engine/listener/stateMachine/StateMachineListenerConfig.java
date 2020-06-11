@@ -19,7 +19,7 @@ import org.springframework.statemachine.config.builders.StateMachineTransitionCo
  */
 @Configuration
 @EnableStateMachine
-public class StateMachineListenerEnabledConfig extends EnumStateMachineConfigurerAdapter<TestStates, TestEvents> {
+public class StateMachineListenerConfig extends EnumStateMachineConfigurerAdapter<TestStates, TestEvents> {
 
     /**
      * 设置状态机通用配置
@@ -95,9 +95,9 @@ public class StateMachineListenerEnabledConfig extends EnumStateMachineConfigure
         return new ExecuteAction("S1->S2 Action");
     }
 
-    @Bean
-    public StateMachineApplicationEventListener stateMachineApplicationEventListener() {
-        return new StateMachineApplicationEventListener();
-    }
+//    @Bean
+//    public StateMachineApplicationEventListener stateMachineApplicationEventListener() {
+//        return new StateMachineApplicationEventListener();
+//    }
 
 }

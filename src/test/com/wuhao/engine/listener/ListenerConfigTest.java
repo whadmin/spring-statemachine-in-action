@@ -3,7 +3,7 @@ package com.wuhao.engine.listener;
 import com.wuhao.engine.listener.listener.StateMachineApplicationEventListener;
 import com.wuhao.engine.listener.listener.TestMachineListener;
 import com.wuhao.engine.listener.stateMachine.StateMachineListenerDisabledConfig;
-import com.wuhao.engine.listener.stateMachine.StateMachineListenerEnabledConfig;
+import com.wuhao.engine.listener.stateMachine.StateMachineListenerConfig;
 import com.wuhao.engine.event.TestEvents;
 import com.wuhao.engine.status.TestStates;
 import org.junit.Test;
@@ -26,7 +26,7 @@ public class ListenerConfigTest {
 
     @Test
     public void contextEventsEnabled() throws Exception {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(StateMachineListenerEnabledConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(StateMachineListenerConfig.class);
         assertTrue(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE));
         ObjectStateMachine<TestStates, TestEvents> machine = context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
         assertThat(machine, notNullValue());
