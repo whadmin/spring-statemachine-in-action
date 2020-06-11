@@ -23,6 +23,9 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
+ *
+ * StateAction 可以进行Action处理，发生异常也可以捕获，影响状态机正常推进
+ *
  * @Author: wuhao.w
  * @Date: 2020/5/29 13:15
  */
@@ -31,7 +34,7 @@ public class TransitionActionTest {
 
 
     @Test
-    public void testTransitionActions1() {
+    public void testTransitionActions() {
         //创建IOC容器
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(StateMachineTransitionActionConfig.class);
         //从IOC中获取状态机

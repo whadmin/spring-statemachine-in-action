@@ -17,17 +17,12 @@ public class ErrorAction implements Action<TestStates, TestEvents> {
 
     public String actionName;
 
-    public Boolean isSuccess = false;
-
-    public Boolean isExecute = false;
-
     public ErrorAction(String actionName) {
         this.actionName = actionName;
     }
 
     @Override
     public void execute(StateContext<TestStates, TestEvents> context) {
-        isExecute = true;
         log.error(String.format("%s 抛出异常", actionName));
         throw new RuntimeException("Fake Error");
     }
