@@ -95,6 +95,7 @@ public class StateMachineListenerConfig extends EnumStateMachineConfigurerAdapte
         return new ExecuteAction("S1->S2 Action");
     }
 
+
 //    @Bean
 //    public StateMachineApplicationEventListener stateMachineApplicationEventListener() {
 //        return new StateMachineApplicationEventListener();

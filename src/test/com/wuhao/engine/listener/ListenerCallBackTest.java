@@ -86,6 +86,9 @@ public class ListenerCallBackTest {
         machine.stop();
     }
 
+    /**
+     * 监听 进入状态时通知。
+     */
     @Test
     public void testStateEntered() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(StateMachineListenerConfig.class);
@@ -117,6 +120,9 @@ public class ListenerCallBackTest {
         machine.stop();
     }
 
+    /**
+     * 监听 推出状态时通知。
+     */
     @Test
     public void testStateExited() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(StateMachineListenerConfig.class);
@@ -146,6 +152,9 @@ public class ListenerCallBackTest {
         machine.stop();
     }
 
+    /**
+     * 监听 扩展状态（属性）变更通知。
+     */
     @Test
     public void testExtendedStateEvents() throws Exception {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(StateMachineListenerConfig.class);
@@ -166,6 +175,9 @@ public class ListenerCallBackTest {
     }
 
 
+    /**
+     * 监听 Transition
+     */
     @Test
     public void testTransition() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(StateMachineListenerConfig.class);

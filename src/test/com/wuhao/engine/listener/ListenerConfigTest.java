@@ -24,6 +24,9 @@ import static org.junit.Assert.assertTrue;
 public class ListenerConfigTest {
 
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void contextEventsEnabled() throws Exception {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(StateMachineListenerConfig.class);
@@ -43,6 +46,9 @@ public class ListenerConfigTest {
         assertThat(listener2.count, greaterThan(1));
     }
 
+    /**
+     * 使用 @EnableStateMachine(contextEvents = false) 关闭Spring事件监听
+     */
     @Test
     public void contextEventsDisabled() throws Exception {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(StateMachineListenerDisabledConfig.class);
