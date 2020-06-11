@@ -1,9 +1,9 @@
 package com.wuhao.engine.interceptor.stateMachine;
 
+import com.wuhao.engine.common.BugAction;
 import com.wuhao.engine.common.ExecuteAction;
 import com.wuhao.engine.event.TestEvents;
-import com.wuhao.engine.interceptor.interceptor.TestStateChangeInterceptor;
-import com.wuhao.engine.listener.listener.StateMachineApplicationEventListener;
+import com.wuhao.engine.interceptor.interceptor.TestStateMachineInterceptor;
 import com.wuhao.engine.listener.listener.TestMachineListener;
 import com.wuhao.engine.status.TestStates;
 import org.springframework.context.annotation.Bean;
@@ -60,18 +60,7 @@ public class StateMachineInterceptorConfig extends EnumStateMachineConfigurerAda
                 .target(TestStates.S2)
                 .event(TestEvents.E1)
                 .action(s1tos2Action())
-                .and()
-                .withExternal()
-                .source(TestStates.S2)
-                .target(TestStates.S3)
-                .event(TestEvents.E2)
-                .action(s2tos3Action())
-                .and()
-                .withExternal()
-                .source(TestStates.S3)
-                .target(TestStates.S4)
-                .event(TestEvents.E3)
-                .action(s3tos4Action());
+        .and().withExternal();
     }
 
 
@@ -81,24 +70,13 @@ public class StateMachineInterceptorConfig extends EnumStateMachineConfigurerAda
     }
 
     @Bean
-    public ExecuteAction s1tos2Action() {
-        return new ExecuteAction("S1->S2 Action");
+    public BugAction s1tos2Action() {
+        return new BugAction("S1->S2 Action");
     }
 
     @Bean
-    public ExecuteAction s2tos3Action() {
-        return new ExecuteAction("S2->S3 Action");
-    }
-
-    @Bean
-    public ExecuteAction s3tos4Action() {
-        return new ExecuteAction("S3->S4 Action");
-    }
-
-
-    @Bean
-    public TestStateChangeInterceptor testStateChangeInterceptor(){
-        return new TestStateChangeInterceptor();
+    public TestStateMachineInterceptor testStateMachineInterceptor(){
+        return new TestStateMachineInterceptor();
     }
 
 }
